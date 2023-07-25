@@ -1,0 +1,9 @@
+name: routine-nanopore-qc
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3
+  - nanoq=0.10.0
+  - kraken2=2.1.3
