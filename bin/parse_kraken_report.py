@@ -34,7 +34,18 @@ def parse_kraken_report(kraken_report_path):
 
 def main(args):
     kraken_report = parse_kraken_report(args.report)
-    unclassified_row = list(filter(lambda x: x['rank_code'] == 'U', kraken_report))[0]
+    unclassified_rows = list(filter(lambda x: x['rank_code'] == 'U', kraken_report))
+    unclassified_row = {
+        'percent_seqs_in_clade': 0.0,
+        'num_seqs_in_clade': "0",
+        'num_seqs_this_taxon': "0",
+        'rank_code': 'U',
+        'ncbi_taxonomy_id': "0",
+        'taxon_name': "unclassified",
+    }
+    if len(unclassified_rows) > 0:
+        unclassified_row = unclassified_rows[0]
+
     kraken_report_without_unclassified = list(filter(lambda x: x['rank_code'] != 'U', kraken_report))
     if args.rank is not None:
         kraken_report_without_unclassified = list(filter(lambda x: x['rank_code'] == args.rank, kraken_report_without_unclassified))

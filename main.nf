@@ -9,7 +9,6 @@ include { kraken2 } from './modules/kraken2.nf'
 workflow {
   ch_fastq = Channel.fromPath( params.fastq_search_path ).map{ it -> [it.baseName.split("_")[0], [it]] }
   ch_kraken2_db = Channel.fromPath(params.kraken2_db)
-  ch_run_id = Channel.of(params.run_id)
 
   main:
     nanoq(ch_fastq)
